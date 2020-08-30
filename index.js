@@ -1,39 +1,43 @@
 module.exports = function gourd(mod) {
 	let enabled = true,
 		userName = "",
-		region = mod.region;
+		region = mod.publisher;
 
 	switch (region) {
-		case "na":
-			region = "/"
+		case "eme":
+			region = "/";
 			break;
-		case "eu":
-			region = "/" + region + "/"
-			break;
-		case "ru":
-			region = "/" + region + "/"
+		case "gf":
+			region = "/eu/";
 			break;
 		default:
-			mod.warn("This region is not supported by moongourd.")
+			mod.warn("This region is not supported.");
 			break;
 	}
 
 	mod.command.add(['mongord', 'mg'], () => {
-		enabled = !enabled
-		mod.command.message(`mongord enabled: ${enabled}`)
-	})
+		enabled = !enabled;
+		mod.command.message(`mongord enabled: ${enabled}`);
+	});
 
 	mod.game.on('enter_game', () => {
-        	userName = mod.game.me.name
-    	});
+		userName = mod.game.me.name;
+	});
 
-	mod.hook('S_USER_PAPERDOLL_INFO', 11, event => {
-		if (enabled && event.name != userName) Open(event.name)
-	})
+	mod.hook('S_USER_PAPERDOLL_INFO', 11, async event => {
+		if (enabled && event.name != userName) await Open(event.name);
+	});
 
 	function Open(name) {
-		mod.toClient('S_SHOW_AWESOMIUMWEB_SHOP', 1, {
-			link: encodeURI(`https://moongourd.com${region}results?player=${name}&area=1&boss=1&sort=timedesc`)
-		})
-	}
+		const uri = `https://moongourd.com${region}search/${name}`;
+
+		try {
+			const encoded_uri = encodeURI(uri);
+			mod.toClient('S_SHOW_AWESOMIUMWEB_SHOP', 1, {
+				link: encoded_uri
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	};
 }

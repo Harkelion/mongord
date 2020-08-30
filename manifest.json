@@ -1,7 +1,8 @@
 {
     "files": {
-        "index.js": "1c87738adad9ace57bfa7140c9c2b5a6cc6e2e8393d3953a1700f4b06b5d0cd5",
-        "module.json": "43036c52aac58e7ca94fe8de0bc6355ad5b0cdb8268c3cab9532b2ee7f4475ea"
+        "README.md": "479164f2ea6383e7507353320c11042cd2f077d8f8183b60dc031e44518e6f1e",
+        "index.js": "559ca3916e397791a4e38f839731c8feeb1e363ceff993689126703157d092d0",
+        "module.json": "ee916502333d4b8b2921ad1fbe17752f3c50da71c24874332a04f9e6c808fd34"
     },
     "defs": {
         "S_SHOW_AWESOMIUMWEB_SHOP": 1,
